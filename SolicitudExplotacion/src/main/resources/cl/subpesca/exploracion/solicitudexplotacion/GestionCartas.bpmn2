@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_68aXUHeSEeajA7NMnIrm4Q" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" exporter="jBPM Designer" exporterVersion="6.2.0" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.omg.org/bpmn20" typeLanguage="http://www.java.com/javaTypes">
+  <bpmn2:itemDefinition id="_opcionSolicitudItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_encargadoCartaSeleccionadoItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_UserTask_4_outProfesionalAsignadoSeleccionadoInputXItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_UserTask_4_PriorityInputXItem" structureRef="Integer"/>
+  <bpmn2:itemDefinition id="_UserTask_4_SkippableInputXItem" structureRef="Boolean"/>
+  <bpmn2:itemDefinition id="_UserTask_4_LocaleInputXItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_UserTask_2_PriorityInputXItem" structureRef="Integer"/>
+  <bpmn2:itemDefinition id="_UserTask_2_SkippableInputXItem" structureRef="Boolean"/>
+  <bpmn2:itemDefinition id="_UserTask_2_LocaleInputXItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_UserTask_2_GroupIdInputXItem" structureRef="Object"/>
+  <bpmn2:itemDefinition id="_UserTask_2_outOpcionSolicitudOutputXItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_UserTask_3_PriorityInputXItem" structureRef="Integer"/>
+  <bpmn2:itemDefinition id="_UserTask_3_SkippableInputXItem" structureRef="Boolean"/>
+  <bpmn2:itemDefinition id="_UserTask_3_LocaleInputXItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_UserTask_3_GroupIdInputXItem" structureRef="Object"/>
+  <bpmn2:process id="GestionDocumentosOficiales.GestionCartas" drools:packageName="org.jbpm" drools:version="1.2" name="GestionCartas" isExecutable="true">
+    <bpmn2:property id="opcionSolicitud" itemSubjectRef="_opcionSolicitudItem"/>
+    <bpmn2:property id="encargadoCartaSeleccionado" itemSubjectRef="_encargadoCartaSeleccionadoItem"/>
+    <bpmn2:laneSet id="_68aXUXeSEeajA7NMnIrm4Q">
+      <bpmn2:lane id="Lane_1" drools:selectable="true" color:background-color="#ffffff" color:border-color="#000000" color:color="#000000" name="Profesional Encargado">
+        <bpmn2:extensionElements>
+          <drools:metaData name="elementname">
+            <drools:metaValue><![CDATA[Profesional Encargado]]></drools:metaValue>
+          </drools:metaData>
+        </bpmn2:extensionElements>
+        <bpmn2:flowNodeRef>UserTask_4</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>ExclusiveGateway_2</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>processStartEvent</bpmn2:flowNodeRef>
+      </bpmn2:lane>
+      <bpmn2:lane id="Lane_2" drools:selectable="true" color:background-color="#ffffff" color:border-color="#000000" color:color="#000000" name="Coordinador de Unidad">
+        <bpmn2:extensionElements>
+          <drools:metaData name="elementname">
+            <drools:metaValue><![CDATA[Coordinador de Unidad]]></drools:metaValue>
+          </drools:metaData>
+        </bpmn2:extensionElements>
+        <bpmn2:flowNodeRef>ExclusiveGateway_1</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>UserTask_2</bpmn2:flowNodeRef>
+      </bpmn2:lane>
+      <bpmn2:lane id="Lane_3" drools:selectable="true" color:background-color="#ffffff" color:border-color="#000000" color:color="#000000" name="Jefe Division">
+        <bpmn2:extensionElements>
+          <drools:metaData name="elementname">
+            <drools:metaValue><![CDATA[Jefe Division]]></drools:metaValue>
+          </drools:metaData>
+        </bpmn2:extensionElements>
+        <bpmn2:flowNodeRef>EndEvent_1</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>UserTask_3</bpmn2:flowNodeRef>
+      </bpmn2:lane>
+    </bpmn2:laneSet>
+    <bpmn2:sequenceFlow id="SequenceFlow_4" drools:selectable="true" drools:priority="1" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="UserTask_2" targetRef="ExclusiveGateway_1"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_6" drools:selectable="true" drools:priority="1" color:background-color="#000000" color:border-color="#000000" color:color="#000000" name="Rechaza Carta Propuesta" sourceRef="ExclusiveGateway_1" targetRef="ExclusiveGateway_2">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Rechaza Carta Propuesta]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_68aXUneSEeajA7NMnIrm4Q" language="http://www.java.com/java"><![CDATA[return  KieFunctions.equalsTo(opcionSolicitud, "1");]]></bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="SequenceFlow_7" drools:selectable="true" drools:priority="1" color:background-color="#000000" color:border-color="#000000" color:color="#000000" name="Carta Aprobada" sourceRef="ExclusiveGateway_1" targetRef="UserTask_3">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Carta Aprobada]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_68aXU3eSEeajA7NMnIrm4Q" language="http://www.java.com/java"><![CDATA[return  KieFunctions.equalsTo(opcionSolicitud, "0");]]></bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="SequenceFlow_8" drools:selectable="true" drools:priority="1" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="UserTask_3" targetRef="EndEvent_1"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_10" drools:selectable="true" drools:priority="1" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="ExclusiveGateway_2" targetRef="UserTask_4"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_11" drools:selectable="true" drools:priority="1" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="UserTask_4" targetRef="UserTask_2"/>
+    <bpmn2:sequenceFlow id="_BB562E95-77BC-4202-9869-529666AD7F78" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="processStartEvent" targetRef="ExclusiveGateway_2"/>
+    <bpmn2:userTask id="UserTask_4" drools:selectable="true" drools:scriptFormat="http://www.java.com/java" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="Adjuntar Propuesta de Carta y Solicitar Aprobacion">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Adjuntar Propuesta de Carta y Solicitar Aprobacion]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_11</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="_68aXVHeSEeajA7NMnIrm4Q">
+        <bpmn2:dataInput id="UserTask_4_TaskNameInputX" name="TaskName"/>
+        <bpmn2:dataInput id="UserTask_4_outProfesionalAsignadoSeleccionadoInputX" drools:dtype="String" itemSubjectRef="_UserTask_4_outProfesionalAsignadoSeleccionadoInputXItem" name="outProfesionalAsignadoSeleccionado"/>
+        <bpmn2:dataInput id="UserTask_4_PriorityInputX" drools:dtype="Integer" itemSubjectRef="_UserTask_4_PriorityInputXItem" name="Priority"/>
+        <bpmn2:dataInput id="UserTask_4_SkippableInputX" drools:dtype="Boolean" itemSubjectRef="_UserTask_4_SkippableInputXItem" name="Skippable"/>
+        <bpmn2:dataInput id="UserTask_4_LocaleInputX" drools:dtype="String" itemSubjectRef="_UserTask_4_LocaleInputXItem" name="Locale"/>
+        <bpmn2:inputSet id="_68aXVXeSEeajA7NMnIrm4Q">
+          <bpmn2:dataInputRefs>UserTask_4_outProfesionalAsignadoSeleccionadoInputX</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>UserTask_4_PriorityInputX</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>UserTask_4_SkippableInputX</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>UserTask_4_LocaleInputX</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>UserTask_4_TaskNameInputX</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="_68aXVneSEeajA7NMnIrm4Q"/>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="_68aXV3eSEeajA7NMnIrm4Q">
+        <bpmn2:targetRef>UserTask_4_TaskNameInputX</bpmn2:targetRef>
+        <bpmn2:assignment id="_68aXWHeSEeajA7NMnIrm4Q">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_68aXWXeSEeajA7NMnIrm4Q">AdjuntarPropuestadeCartaySolicitarAprobacion</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_68aXWneSEeajA7NMnIrm4Q">UserTask_4_TaskNameInputX</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_68aXW3eSEeajA7NMnIrm4Q">
+        <bpmn2:sourceRef>encargadoCartaSeleccionado</bpmn2:sourceRef>
+        <bpmn2:targetRef>UserTask_4_outProfesionalAsignadoSeleccionadoInputX</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_68aXXHeSEeajA7NMnIrm4Q">
+        <bpmn2:targetRef>UserTask_4_SkippableInputX</bpmn2:targetRef>
+        <bpmn2:assignment id="_68aXXXeSEeajA7NMnIrm4Q">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_68aXXneSEeajA7NMnIrm4Q">true</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_68aXX3eSEeajA7NMnIrm4Q">UserTask_4_SkippableInputX</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_68aXYHeSEeajA7NMnIrm4Q">
+        <bpmn2:targetRef>UserTask_4_PriorityInputX</bpmn2:targetRef>
+        <bpmn2:assignment id="_68aXYXeSEeajA7NMnIrm4Q">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_68aXYneSEeajA7NMnIrm4Q">1</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_68aXY3eSEeajA7NMnIrm4Q">UserTask_4_PriorityInputX</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_68aXZHeSEeajA7NMnIrm4Q">
+        <bpmn2:targetRef>UserTask_4_LocaleInputX</bpmn2:targetRef>
+        <bpmn2:assignment id="_68aXZXeSEeajA7NMnIrm4Q">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_68aXZneSEeajA7NMnIrm4Q"><![CDATA[en-UK]]></bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_68aXZ3eSEeajA7NMnIrm4Q">UserTask_4_LocaleInputX</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:potentialOwner id="_68aXaHeSEeajA7NMnIrm4Q">
+        <bpmn2:resourceAssignmentExpression id="_68aXaXeSEeajA7NMnIrm4Q">
+          <bpmn2:formalExpression id="_68aXaneSEeajA7NMnIrm4Q">#{encargadoCartaSeleccionado}</bpmn2:formalExpression>
+        </bpmn2:resourceAssignmentExpression>
+      </bpmn2:potentialOwner>
+    </bpmn2:userTask>
+    <bpmn2:exclusiveGateway id="ExclusiveGateway_2" drools:selectable="true" drools:dg="" color:background-color="#f0e68c" color:border-color="#a67f00" color:color="#000000" name="Join" gatewayDirection="Converging">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Join]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_BB562E95-77BC-4202-9869-529666AD7F78</bpmn2:incoming>
+      <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:startEvent id="processStartEvent" drools:selectable="true" color:background-color="#9acd32" color:border-color="#000000" color:color="#000000" name="">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:outgoing>_BB562E95-77BC-4202-9869-529666AD7F78</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:exclusiveGateway id="ExclusiveGateway_1" drools:selectable="true" drools:dg="Carta Aprobada : SequenceFlow_7" color:background-color="#f0e68c" color:border-color="#a67f00" color:color="#000000" name="Propuesta OK?" gatewayDirection="Diverging" default="SequenceFlow_7">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Propuesta OK?]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
+      <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:userTask id="UserTask_2" drools:selectable="true" drools:scriptFormat="http://www.java.com/java" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="Revisar Carta Propuesta">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Revisar Carta Propuesta]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="_68aXa3eSEeajA7NMnIrm4Q">
+        <bpmn2:dataInput id="UserTask_2_TaskNameInputX" name="TaskName"/>
+        <bpmn2:dataInput id="UserTask_2_PriorityInputX" drools:dtype="Integer" itemSubjectRef="_UserTask_2_PriorityInputXItem" name="Priority"/>
+        <bpmn2:dataInput id="UserTask_2_SkippableInputX" drools:dtype="Boolean" itemSubjectRef="_UserTask_2_SkippableInputXItem" name="Skippable"/>
+        <bpmn2:dataInput id="UserTask_2_LocaleInputX" drools:dtype="String" itemSubjectRef="_UserTask_2_LocaleInputXItem" name="Locale"/>
+        <bpmn2:dataInput id="UserTask_2_GroupIdInputX" drools:dtype="Object" itemSubjectRef="_UserTask_2_GroupIdInputXItem" name="GroupId"/>
+        <bpmn2:dataOutput id="UserTask_2_outOpcionSolicitudOutputX" drools:dtype="String" itemSubjectRef="_UserTask_2_outOpcionSolicitudOutputXItem" name="outOpcionSolicitud"/>
+        <bpmn2:inputSet id="_68aXbHeSEeajA7NMnIrm4Q">
+          <bpmn2:dataInputRefs>UserTask_2_PriorityInputX</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>UserTask_2_SkippableInputX</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>UserTask_2_LocaleInputX</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>UserTask_2_GroupIdInputX</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>UserTask_2_TaskNameInputX</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="_68aXbXeSEeajA7NMnIrm4Q">
+          <bpmn2:dataOutputRefs>UserTask_2_outOpcionSolicitudOutputX</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="_68aXbneSEeajA7NMnIrm4Q">
+        <bpmn2:targetRef>UserTask_2_TaskNameInputX</bpmn2:targetRef>
+        <bpmn2:assignment id="_68aXb3eSEeajA7NMnIrm4Q">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_68aXcHeSEeajA7NMnIrm4Q">RevisarCartaPropuesta</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_68aXcXeSEeajA7NMnIrm4Q">UserTask_2_TaskNameInputX</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_68aXcneSEeajA7NMnIrm4Q">
+        <bpmn2:targetRef>UserTask_2_GroupIdInputX</bpmn2:targetRef>
+        <bpmn2:assignment id="_68aXc3eSEeajA7NMnIrm4Q">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_68aXdHeSEeajA7NMnIrm4Q"><![CDATA[coordinadorUnidadCarta]]></bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_68aXdXeSEeajA7NMnIrm4Q">UserTask_2_GroupIdInputX</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_68aXdneSEeajA7NMnIrm4Q">
+        <bpmn2:targetRef>UserTask_2_SkippableInputX</bpmn2:targetRef>
+        <bpmn2:assignment id="_68aXd3eSEeajA7NMnIrm4Q">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_68aXeHeSEeajA7NMnIrm4Q">true</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_68aXeXeSEeajA7NMnIrm4Q">UserTask_2_SkippableInputX</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_68aXeneSEeajA7NMnIrm4Q">
+        <bpmn2:targetRef>UserTask_2_PriorityInputX</bpmn2:targetRef>
+        <bpmn2:assignment id="_68aXe3eSEeajA7NMnIrm4Q">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_68aXfHeSEeajA7NMnIrm4Q">1</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_68aXfXeSEeajA7NMnIrm4Q">UserTask_2_PriorityInputX</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_68aXfneSEeajA7NMnIrm4Q">
+        <bpmn2:targetRef>UserTask_2_LocaleInputX</bpmn2:targetRef>
+        <bpmn2:assignment id="_68aXf3eSEeajA7NMnIrm4Q">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_68aXgHeSEeajA7NMnIrm4Q"><![CDATA[en-UK]]></bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_68aXgXeSEeajA7NMnIrm4Q">UserTask_2_LocaleInputX</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="_68aXgneSEeajA7NMnIrm4Q">
+        <bpmn2:sourceRef>UserTask_2_outOpcionSolicitudOutputX</bpmn2:sourceRef>
+        <bpmn2:targetRef>opcionSolicitud</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:userTask>
+    <bpmn2:endEvent id="EndEvent_1" drools:selectable="true" color:background-color="#ff6347" color:border-color="#000000" color:color="#000000" name="Fin">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Fin]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Fin]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:userTask id="UserTask_3" drools:selectable="true" drools:scriptFormat="http://www.java.com/java" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="Firmar Propuesta de Carta">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Firmar Propuesta de Carta]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_8</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="_68aXg3eSEeajA7NMnIrm4Q">
+        <bpmn2:dataInput id="UserTask_3_TaskNameInputX" name="TaskName"/>
+        <bpmn2:dataInput id="UserTask_3_PriorityInputX" drools:dtype="Integer" itemSubjectRef="_UserTask_3_PriorityInputXItem" name="Priority"/>
+        <bpmn2:dataInput id="UserTask_3_SkippableInputX" drools:dtype="Boolean" itemSubjectRef="_UserTask_3_SkippableInputXItem" name="Skippable"/>
+        <bpmn2:dataInput id="UserTask_3_LocaleInputX" drools:dtype="String" itemSubjectRef="_UserTask_3_LocaleInputXItem" name="Locale"/>
+        <bpmn2:dataInput id="UserTask_3_GroupIdInputX" drools:dtype="Object" itemSubjectRef="_UserTask_3_GroupIdInputXItem" name="GroupId"/>
+        <bpmn2:inputSet id="_68aXhHeSEeajA7NMnIrm4Q">
+          <bpmn2:dataInputRefs>UserTask_3_PriorityInputX</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>UserTask_3_SkippableInputX</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>UserTask_3_LocaleInputX</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>UserTask_3_GroupIdInputX</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>UserTask_3_TaskNameInputX</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="_68aXhXeSEeajA7NMnIrm4Q"/>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="_68aXhneSEeajA7NMnIrm4Q">
+        <bpmn2:targetRef>UserTask_3_TaskNameInputX</bpmn2:targetRef>
+        <bpmn2:assignment id="_68aXh3eSEeajA7NMnIrm4Q">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_68aXiHeSEeajA7NMnIrm4Q">FirmarPropuestadeCarta</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_68aXiXeSEeajA7NMnIrm4Q">UserTask_3_TaskNameInputX</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_68aXineSEeajA7NMnIrm4Q">
+        <bpmn2:targetRef>UserTask_3_GroupIdInputX</bpmn2:targetRef>
+        <bpmn2:assignment id="_68aXi3eSEeajA7NMnIrm4Q">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_68aXjHeSEeajA7NMnIrm4Q"><![CDATA[jefeDivisionCara]]></bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_68aXjXeSEeajA7NMnIrm4Q">UserTask_3_GroupIdInputX</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_68aXjneSEeajA7NMnIrm4Q">
+        <bpmn2:targetRef>UserTask_3_SkippableInputX</bpmn2:targetRef>
+        <bpmn2:assignment id="_68aXj3eSEeajA7NMnIrm4Q">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_68aXkHeSEeajA7NMnIrm4Q">true</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_68aXkXeSEeajA7NMnIrm4Q">UserTask_3_SkippableInputX</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_68aXkneSEeajA7NMnIrm4Q">
+        <bpmn2:targetRef>UserTask_3_PriorityInputX</bpmn2:targetRef>
+        <bpmn2:assignment id="_68aXk3eSEeajA7NMnIrm4Q">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_68aXlHeSEeajA7NMnIrm4Q">1</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_68aXlXeSEeajA7NMnIrm4Q">UserTask_3_PriorityInputX</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_68aXlneSEeajA7NMnIrm4Q">
+        <bpmn2:targetRef>UserTask_3_LocaleInputX</bpmn2:targetRef>
+        <bpmn2:assignment id="_68aXl3eSEeajA7NMnIrm4Q">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="_68aXmHeSEeajA7NMnIrm4Q"><![CDATA[en-UK]]></bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="_68aXmXeSEeajA7NMnIrm4Q">UserTask_3_LocaleInputX</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:userTask>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="_68aXmneSEeajA7NMnIrm4Q">
+    <bpmndi:BPMNPlane id="_68aXm3eSEeajA7NMnIrm4Q" bpmnElement="GestionDocumentosOficiales.GestionCartas">
+      <bpmndi:BPMNEdge id="_68aXnHeSEeajA7NMnIrm4Q" bpmnElement="SequenceFlow_4">
+        <di:waypoint xsi:type="dc:Point" x="1245.0" y="226.0"/>
+        <di:waypoint xsi:type="dc:Point" x="830.0" y="205.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1600.0" y="371.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_68aXnXeSEeajA7NMnIrm4Q" bpmnElement="SequenceFlow_6">
+        <di:waypoint xsi:type="dc:Point" x="1600.0" y="371.0"/>
+        <di:waypoint xsi:type="dc:Point" x="395.0" y="275.0"/>
+        <di:waypoint xsi:type="dc:Point" x="730.0" y="120.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_68aXnneSEeajA7NMnIrm4Q" bpmnElement="SequenceFlow_7">
+        <di:waypoint xsi:type="dc:Point" x="1600.0" y="371.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1566.0" y="437.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_68aXn3eSEeajA7NMnIrm4Q" bpmnElement="SequenceFlow_8">
+        <di:waypoint xsi:type="dc:Point" x="1566.0" y="437.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1833.0" y="450.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_68aXoHeSEeajA7NMnIrm4Q" bpmnElement="SequenceFlow_10">
+        <di:waypoint xsi:type="dc:Point" x="730.0" y="120.0"/>
+        <di:waypoint xsi:type="dc:Point" x="983.0" y="107.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_68aXoXeSEeajA7NMnIrm4Q" bpmnElement="SequenceFlow_11">
+        <di:waypoint xsi:type="dc:Point" x="983.0" y="107.0"/>
+        <di:waypoint xsi:type="dc:Point" x="670.0" y="75.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1245.0" y="226.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_68aXoneSEeajA7NMnIrm4Q" bpmnElement="_BB562E95-77BC-4202-9869-529666AD7F78">
+        <di:waypoint xsi:type="dc:Point" x="305.0" y="125.0"/>
+        <di:waypoint xsi:type="dc:Point" x="730.0" y="120.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_68aXo3eSEeajA7NMnIrm4Q" bpmnElement="UserTask_4">
+        <dc:Bounds height="66.0" width="126.0" x="480.0" y="42.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_68aXpHeSEeajA7NMnIrm4Q" bpmnElement="ExclusiveGateway_2">
+        <dc:Bounds height="40.0" width="40.0" x="375.0" y="55.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_68aXpXeSEeajA7NMnIrm4Q" bpmnElement="processStartEvent">
+        <dc:Bounds height="30.0" width="30.0" x="165.0" y="60.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_68aXpneSEeajA7NMnIrm4Q" bpmnElement="ExclusiveGateway_1">
+        <dc:Bounds height="40.0" width="40.0" x="810.0" y="255.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_68aXp3eSEeajA7NMnIrm4Q" bpmnElement="UserTask_2">
+        <dc:Bounds height="50.0" width="110.0" x="615.0" y="180.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_68aXqHeSEeajA7NMnIrm4Q" bpmnElement="EndEvent_1">
+        <dc:Bounds height="28.0" width="28.0" x="929.0" y="372.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_68aXqXeSEeajA7NMnIrm4Q" bpmnElement="UserTask_3">
+        <dc:Bounds height="50.0" width="110.0" x="775.0" y="360.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_68aXqneSEeajA7NMnIrm4Q" bpmnElement="Lane_1">
+        <dc:Bounds height="150.0" width="1001.0" x="40.0" y="10.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_68aXq3eSEeajA7NMnIrm4Q" bpmnElement="Lane_2">
+        <dc:Bounds height="150.0" width="1001.0" x="40.0" y="159.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_68aXrHeSEeajA7NMnIrm4Q" bpmnElement="Lane_3">
+        <dc:Bounds height="157.0" width="1003.0" x="39.0" y="308.0"/>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmn2:relationship id="_68aXrXeSEeajA7NMnIrm4Q" type="BPSimData">
+    <bpmn2:extensionElements>
+      <bpsim:BPSimData>
+        <bpsim:Scenario xsi:type="bpsim:Scenario" id="default" name="Simulationscenario">
+          <bpsim:ScenarioParameters xsi:type="bpsim:ScenarioParameters" baseTimeUnit="min"/>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_BB562E95-77BC-4202-9869-529666AD7F78" id="_68aXrneSEeajA7NMnIrm4Q">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="UserTask_2" id="_68aXr3eSEeajA7NMnIrm4Q">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ResourceParameters xsi:type="bpsim:ResourceParameters">
+              <bpsim:Availability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="8.0"/>
+              </bpsim:Availability>
+              <bpsim:Quantity xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="1.0"/>
+              </bpsim:Quantity>
+            </bpsim:ResourceParameters>
+            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
+              <bpsim:UnitCost xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="UserTask_4" id="_68aXsHeSEeajA7NMnIrm4Q">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ResourceParameters xsi:type="bpsim:ResourceParameters">
+              <bpsim:Availability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="8.0"/>
+              </bpsim:Availability>
+              <bpsim:Quantity xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="1.0"/>
+              </bpsim:Quantity>
+            </bpsim:ResourceParameters>
+            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
+              <bpsim:UnitCost xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="EndEvent_1" id="_68aXsXeSEeajA7NMnIrm4Q">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="SequenceFlow_11" id="_68aXsneSEeajA7NMnIrm4Q">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="UserTask_3" id="_68aXs3eSEeajA7NMnIrm4Q">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ResourceParameters xsi:type="bpsim:ResourceParameters">
+              <bpsim:Availability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="8.0"/>
+              </bpsim:Availability>
+              <bpsim:Quantity xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="1.0"/>
+              </bpsim:Quantity>
+            </bpsim:ResourceParameters>
+            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
+              <bpsim:UnitCost xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="SequenceFlow_8" id="_68aXtHeSEeajA7NMnIrm4Q">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="SequenceFlow_6" id="_68aXtXeSEeajA7NMnIrm4Q">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="SequenceFlow_7" id="_68aXtneSEeajA7NMnIrm4Q">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="SequenceFlow_4" id="_68aXt3eSEeajA7NMnIrm4Q">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="SequenceFlow_10" id="_68aXuHeSEeajA7NMnIrm4Q">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="processStartEvent" id="_68aXuXeSEeajA7NMnIrm4Q">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+        </bpsim:Scenario>
+      </bpsim:BPSimData>
+    </bpmn2:extensionElements>
+    <bpmn2:source>_68aXUHeSEeajA7NMnIrm4Q</bpmn2:source>
+    <bpmn2:target>_68aXUHeSEeajA7NMnIrm4Q</bpmn2:target>
+  </bpmn2:relationship>
+</bpmn2:definitions>
